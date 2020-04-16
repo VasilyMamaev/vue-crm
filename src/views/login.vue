@@ -81,7 +81,7 @@ export default {
     password: { minLength: minLength(6), required }
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
@@ -90,9 +90,12 @@ export default {
         email: this.email,
         password: this.password
       };
-      console.log(loginFormData); // for fetch later
 
-      this.$router.push("/");
+      try {
+        await this.$store.dispatch("login", loginFormData);
+        this.$router.push("/");
+        // eslint-disable-next-line no-empty
+      } catch (e) {}
     }
   },
   mounted() {
