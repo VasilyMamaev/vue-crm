@@ -1,23 +1,23 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Новая запись</h3>
+      <h3>{{ "NewRecord" | localize }}</h3>
     </div>
     <Loader v-if="loading" />
 
     <p class="center" v-else-if="!categories.length">
-      Категории отсутствуют.
-      <router-link to="/categories">Добавить категорию</router-link>
+      {{ "MessageNoCategories" | localize }}.
+      <router-link to="/categories">{{ "AddCategory" | localize }}</router-link>
     </p>
 
     <form v-else class="form" @submit.prevent="handleSubmit">
       <div class="input-field">
         <select ref="select" v-model="category">
           <option v-for="c of categories" :key="c.id" :value="c.id">
-            {{c.title}}
+            {{ c.title }}
           </option>
         </select>
-        <label>Выберите категорию</label>
+        <label>{{ "ChooseCategory" | localize }}</label>
       </div>
 
       <p>
@@ -29,53 +29,57 @@
             value="income"
             v-model="type"
           />
-          <span>Доход</span>
+          <span>{{ "Income" | localize }}</span>
         </label>
       </p>
 
       <p>
         <label>
-          <input 
+          <input
             class="with-gap"
             name="type"
             type="radio"
             value="outcome"
             v-model="type"
           />
-          <span>Расход</span>
+          <span>{{ "Outcome" | localize }}</span>
         </label>
       </p>
 
       <div class="input-field">
-        <input 
+        <input
           id="amount"
           type="number"
           v-model.number="amount"
           :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
         />
-        <label for="amount">Сумма</label>
+        <label for="amount">{{ "Amount" | localize }}</label>
         <span
           class="helper-text invalid"
           v-if="$v.amount.$dirty && !$v.amount.minValue"
-        >Минимальная величина{{ $v.amount.params.minValue.min }}</span>
+          >{{ "MinValue" | localize }}{{ $v.amount.params.minValue.min }}</span
+        >
       </div>
 
       <div class="input-field">
         <input
-        id="description"
-        type="text"
-        v-model="description"
-        :class="{ invalid: $v.description.$dirty && !$v.description.required }"
+          id="description"
+          type="text"
+          v-model="description"
+          :class="{
+            invalid: $v.description.$dirty && !$v.description.required
+          }"
         />
-        <label for="description">Описание</label>
+        <label for="description">{{ "Description" | localize }}</label>
         <span
           class="helper-text invalid"
           v-if="$v.description.$dirty && !$v.description.required"
-        >Введите описание</span>
+          >{{ "EnterDescription" | localize }}</span
+        >
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        Создать
+        {{ "Create" | localize }}
         <i class="material-icons right">send</i>
       </button>
     </form>
@@ -101,10 +105,10 @@ export default {
     ...mapGetters(["info"]),
     canCreateRecord() {
       if (this.type === "income") {
-        return true
+        return true;
       }
 
-      return this.info.bill >= this.amount
+      return this.info.bill >= this.amount;
     }
   },
   async mounted() {
@@ -112,17 +116,17 @@ export default {
     this.loading = false;
 
     if (this.categories.length) {
-      this.category = this.categories[0].id
+      this.category = this.categories[0].id;
     }
 
     setTimeout(() => {
-      this.select = window.M.FormSelect.init(this.$refs.select)
-      window.M.updateTextFields()
+      this.select = window.M.FormSelect.init(this.$refs.select);
+      window.M.updateTextFields();
     }, 0);
   },
   destroyed() {
     if (this.select && this.select.destroy) {
-      this.select.destroy()
+      this.select.destroy();
     }
   },
   validations: {
@@ -132,8 +136,8 @@ export default {
   methods: {
     async handleSubmit() {
       if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
+        this.$v.$touch();
+        return;
       }
 
       if (this.canCreateRecord) {
@@ -144,24 +148,26 @@ export default {
             description: this.description,
             type: this.type,
             date: new Date().toJSON()
-          })
-          const bill = this.type === "income"
-            ? this.info.bill + this.amount
-            : this.info.bill - this.amount
+          });
+          const bill =
+            this.type === "income"
+              ? this.info.bill + this.amount
+              : this.info.bill - this.amount;
 
-          await this.$store.dispatch("updateInfo", {bill})
-          this.$message("Запись успешно создана")
-          this.$V.$reset()
+          await this.$store.dispatch("updateInfo", { bill });
+          this.$message("Запись успешно создана");
+          this.$V.$reset();
 
-          this.amount = 1
-          this.description = ""
-        // eslint-disable-next-line no-empty
+          this.amount = 1;
+          this.description = "";
+          // eslint-disable-next-line no-empty
         } catch (e) {}
-        
       } else {
-        this.$message(`Недостаточно средств на счете (${this.amount - this.info.bill})`)
+        this.$message(
+          `Недостаточно средств на счете (${this.amount - this.info.bill})`
+        );
       }
     }
   }
-}
+};
 </script>

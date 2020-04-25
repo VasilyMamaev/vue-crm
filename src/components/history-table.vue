@@ -3,25 +3,24 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Сумма</th>
-        <th>Дата</th>
-        <th>Категория</th>
-        <th>Тип</th>
-        <th>Открыть</th>
+        <th>{{ "Amount" | localize }}</th>
+        <th>{{ "Date" | localize }}</th>
+        <th>{{ "HistoryCategoryName" | localize }}</th>
+        <th>{{ "Type" | localize }}</th>
+        <th>{{ "Open" | localize }}</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr v-for="(record,i) of records" :key="record.id">
-        <td>{{i + 1}}</td>
-        <td>{{record.amount | currency("RUB")}}</td>
-        <td>{{record.date | date('datetime')}}</td>
-        <td>{{record.categoryName}}</td>
+      <tr v-for="(record, i) of records" :key="record.id">
+        <td>{{ i + 1 }}</td>
+        <td>{{ record.amount | currency("RUB") }}</td>
+        <td>{{ record.date | date("datetime") }}</td>
+        <td>{{ record.categoryName }}</td>
         <td>
-          <span
-            class="white-text badge red"
-            :class="[record.typeClass]"
-          >{{record.typeText}}</span>
+          <span class="white-text badge red" :class="[record.typeClass]">{{
+            record.typeText
+          }}</span>
         </td>
         <td>
           <button
@@ -45,5 +44,5 @@ export default {
       type: Array
     }
   }
-}
+};
 </script>

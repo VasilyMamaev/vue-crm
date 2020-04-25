@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">{{ "HomeAccounting" | localize }}</span>
       <div class="input-field">
         <input
           id="email"
@@ -17,12 +17,12 @@
         <small
           class="helper-text invalid"
           v-if="$v.email.$dirty && !$v.email.required"
-          >Введите Email</small
+          >{{ "EnterEmail" | localize }}</small
         >
         <small
           class="helper-text invalid"
           v-else-if="$v.email.$dirty && !$v.email.email"
-          >Введите корретный Email</small
+          >{{ "EnterCorrectEmail" | localize }}</small
         >
       </div>
       <div class="input-field">
@@ -36,17 +36,18 @@
               ($v.password.$dirty && !$v.password.minLength)
           }"
         />
-        <label for="password">Password</label>
+        <label for="password">{{ "Password" | localize }}</label>
         <small
           class="helper-text invalid"
           v-if="$v.password.$dirty && !$v.password.required"
-          >Введите пароль</small
+          >{{ "EnterPassword" | localize }}</small
         >
         <small
           class="helper-text invalid"
           v-else-if="$v.password.$dirty && !$v.password.minLength"
-          >Минимальная длинна пароля
-          {{ $v.password.$params.minLength.min }} символов</small
+          >{{ "MinPassword" | localize }}
+          {{ $v.password.$params.minLength.min }}
+          {{ "Symbols" | localize }}</small
         >
       </div>
       <div class="input-field">
@@ -60,36 +61,36 @@
               ($v.name.$dirty && !$v.name.minLength)
           }"
         />
-        <label for="name">Имя</label>
+        <label for="name">{{ "ProfileName" | localize }}</label>
         <small
           class="helper-text invalid"
           v-if="$v.name.$dirty && !$v.name.required"
-          >Введите имя</small
+          >{{ "MessageEnterName" | localize }}</small
         >
         <small
           class="helper-text invalid"
           v-else-if="$v.name.$dirty && !$v.name.minLength"
-          >Минимальное количество символов {{ $v.name.$params.minLength.min }}
+          >{{ "MinSymbols" | localize }} {{ $v.name.$params.minLength.min }}
         </small>
       </div>
       <p>
         <label>
           <input type="checkbox" v-model="accept" />
-          <span>С правилами согласен</span>
+          <span>{{ "ConfirmRules" | localize }}</span>
         </label>
       </p>
     </div>
     <div class="card-action">
       <div>
         <button class="btn waves-effect waves-light auth-submit" type="submit">
-          Зарегистрироваться
+          {{ "Registrate" | localize }}
           <i class="material-icons right">send</i>
         </button>
       </div>
 
       <p class="center">
-        Уже есть аккаунт?
-        <router-link to="/login">Войти!</router-link>
+        {{ "AlreadyHasAccount" | localize }}?
+        <router-link to="/login">{{ "Enter" | localize }}!</router-link>
       </p>
     </div>
   </form>
