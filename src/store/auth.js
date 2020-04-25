@@ -19,7 +19,8 @@ export default {
           .ref(`users/${uid}/info`)
           .set({
             bill: 10000,
-            name
+            name,
+            localize: "ru-RU"
           });
       } catch (e) {
         commit("setError", e);

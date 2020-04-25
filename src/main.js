@@ -3,11 +3,13 @@ import Vuelidate from "vuelidate";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import VueMeta from "vue-meta";
 import dateFilter from "@/filters/date.filter";
 import currencyFilter from "@/filters/currency.filter";
 import localizeFilter from "@/filters/localize.filter";
 import tooltipDirective from "./directives/tooltip.directive";
 import messagePlugin from "@/utils/message.plugin";
+import titlePlugin from "@/utils/title.plugin";
 import Paginate from "vuejs-paginate";
 import Loader from "@/components/ui/loader";
 import "./registerServiceWorker";
@@ -20,13 +22,15 @@ import "firebase/database";
 Vue.config.productionTip = false;
 
 Vue.use(messagePlugin);
+Vue.use(titlePlugin);
+Vue.use(VueMeta);
 Vue.filter("date", dateFilter);
 Vue.filter("currency", currencyFilter);
-Vue.filter("localize", localizeFilter)
-Vue.directive("tooltip", tooltipDirective)
+Vue.filter("localize", localizeFilter);
+Vue.directive("tooltip", tooltipDirective);
 Vue.use(Vuelidate);
 Vue.component("Loader", Loader);
-Vue.component('Paginate', Paginate);
+Vue.component("Paginate", Paginate);
 
 const firebaseConfig = {
   apiKey: "AIzaSyDR3HX0uHPX96Bqfv_8bYMtW8QMcytp5Ag",

@@ -40,6 +40,11 @@
 <script>
 export default {
   name: "detail-record",
+  metaInfo() {
+    return {
+      title: this.$title("DetailTitle")
+    };
+  },
   data: () => ({
     record: null,
     loading: true

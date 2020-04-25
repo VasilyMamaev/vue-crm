@@ -51,5 +51,17 @@
   "BillInCurrency": "Счет в валюте",
   "ExchangeRates": "Курс валют",
   "Currency": "Валюта",
-  "Course": "Курс"
+  "Course": "Курс",
+  "Back": "Назад",
+  "Forward": "Вперед",
+  "ShowRecord": "Посмотреть запись",
+  "DetailTitle": "Подробности",
+  "LoginTitle": "Вход",
+  "RegisterTitle": "Регистрация",
+  "Home": "Домашняя страница",
+  "Login": "войдите в систему",
+  "Logout": "вы вышли из системы",
+  "UserNotFound": "Пользователь не найден",
+  "WrongPassword": "Неверный пароль",
+  "EmailAlreadyUse": "Данный Email уже используется"
 }

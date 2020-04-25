@@ -27,6 +27,11 @@ export default {
     isLoading: true,
     currency: null
   }),
+  metaInfo() {
+    return {
+      title: this.$title("Home")
+    };
+  },
   components: {
     HomeBill,
     HomeCurrency
@@ -35,11 +40,13 @@ export default {
     async refresh() {
       this.isLoading = true;
       this.currency = await this.$store.dispatch("fetchCurrency");
+      this.currency.rates["EUR"] = 1;
       this.isLoading = false;
     }
   },
   async mounted() {
     this.currency = await this.$store.dispatch("fetchCurrency");
+    this.currency.rates["EUR"] = 1;
     this.isLoading = false;
   }
 };

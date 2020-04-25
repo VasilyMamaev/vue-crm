@@ -22,8 +22,8 @@
         v-model="page"
         :page-count="pageCount"
         :click-handler="changePageHandler"
-        :prev-text="'Назад'"
-        :next-text="'Вперед'"
+        :prev-text="'Back' | localize"
+        :next-text="'Forward' | localize"
         :container-class="'pagination'"
         :page-class="'waves-effect'"
       />
@@ -35,9 +35,15 @@
 import HistoryTable from "@/components/history-table";
 import PaginationMixin from "@/mixins/pagination.mixin";
 import { Pie } from "vue-chartjs";
+import localizeFilter from "@/filters/localize.filter";
 
 export default {
   name: "history",
+  metaInfo() {
+    return {
+      title: this.$title("History")
+    };
+  },
   extends: Pie,
   mixins: [PaginationMixin],
   components: {
@@ -64,7 +70,10 @@ export default {
             categoryName: categories.find(c => c.id === record.categoryId)
               .title,
             typeClass: record.type === "income" ? "green" : "red",
-            typeText: record.type === "income" ? "Доход" : "Расход"
+            typeText:
+              record.type === "income"
+                ? localizeFilter("Income")
+                : localizeFilter("Outcome")
           };
         })
       );

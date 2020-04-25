@@ -51,5 +51,17 @@
   "BillInCurrency": "Bill in currency",
   "ExchangeRates": "Exchange rates",
   "Currency": "Currency",
-  "Course": "Course"
+  "Course": "Course",
+  "Back": "prev",
+  "Forward": "next",
+  "ShowRecord": "Show record",
+  "DetailTitle": "Details",
+  "LoginTitle": "Sign in",
+  "RegisterTitle": "Sign up",
+  "Home": "Home",
+  "Login": "Log in",
+  "Logout": "You are logged out",
+  "UserNotFound": "User not found",
+  "WrongPassword": "Wrong password",
+  "EmailAlreadyUse": "Email already use"
 }
